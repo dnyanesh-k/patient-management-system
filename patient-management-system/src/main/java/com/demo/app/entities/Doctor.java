@@ -1,11 +1,12 @@
 package com.demo.app.entities;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -15,36 +16,40 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "patients")
+@Table(name = "doctors")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Patient extends BaseEntity{
-	
+public class Doctor extends BaseEntity {
+
 	@Column(nullable = false,length = 15)
 	private String firstName;
-
+	
 	@Column(nullable = false,length = 15)
 	private String lastName;
 	
-	@Column(nullable = false)
-	private LocalDate dateOfBirth;
-	
-	@Column(nullable = false,length = 15)
-	private String contactNumber;
-
-	@Column(nullable = false)
-	private String gender;	
-	
 	@Column(nullable = false,length = 100)
-	private String address;
+	private String specialization;
+	
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Availability availability;
+	
+	private Double rating;
 	
 	@OneToOne
-	@JoinColumn(name = "user_id",nullable = false)
+	@JoinColumn(name="user_id",nullable = false)
 	private User user;
 	
-	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private List<Invoice> invoices;
+	@OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL)
+	private List<Appointment> appointments;
 	
-
+	@OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL)
+	private List<Prescription> prescriptions;
+	
+	@OneToMany(mappedBy = "doctor",cascade =CascadeType.ALL )
+	private List<Feedback> feedback;
+	
+	
+	
 }
