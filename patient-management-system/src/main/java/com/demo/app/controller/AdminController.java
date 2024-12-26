@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.app.dto.PatientDTO;
 import com.demo.app.entities.Doctor;
 import com.demo.app.entities.Patient;
 import com.demo.app.service.DoctorService;
@@ -42,12 +44,12 @@ public class AdminController {
 		return ResponseEntity.ok(patientService.getAllPatients());
 	}
 
-	@GetMapping("/patients")
-	public ResponseEntity<?> createPatient(@RequestBody Patient patient) {
+	@PostMapping("/patient")
+	public ResponseEntity<?> createPatient(@RequestBody PatientDTO patient) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(patientService.createPatient(patient));
 	}
 	
-	@GetMapping("/doctors")
+	@PostMapping("/doctor")
 	public ResponseEntity<?> createDoctor(@RequestBody Doctor doctor) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(doctorService.createDoctor(doctor));
 	}

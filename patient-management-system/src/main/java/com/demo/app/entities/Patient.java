@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -39,12 +40,12 @@ public class Patient extends BaseEntity{
 	@Column(nullable = false,length = 100)
 	private String address;
 	
-	@OneToOne
+	@OneToOne//(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id",nullable = false)
 	private User user;
 	
-	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private List<Invoice> invoices;
-	
+//	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+//    private List<Invoice> invoices;
+//	
 
 }

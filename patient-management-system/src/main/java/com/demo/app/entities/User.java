@@ -1,5 +1,7 @@
 package com.demo.app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +23,7 @@ public class User extends BaseEntity{
 	@Column(nullable = false,unique = true,length = 15)
 	private String username;
 	
-	@Column(nullable = false,unique = true,length = 15)
+	@Column(nullable = false,length = 15)
 	private String password;
 	
 	@Column(nullable = false,unique = true,length = 15)
@@ -32,9 +34,11 @@ public class User extends BaseEntity{
 	private Role role;
 	
 	@OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Patient patient;
 	
 	@OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Doctor doctor; 
 	
 }

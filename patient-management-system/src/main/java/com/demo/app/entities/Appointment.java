@@ -3,6 +3,7 @@ package com.demo.app.entities;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -24,7 +25,7 @@ public class Appointment extends BaseEntity{
 	@JoinColumn(name = "doctor_id",nullable = false)
 	private Doctor doctor;
 	
-	@ManyToOne
+	@ManyToOne//(fetch = FetchType.LAZY)
 	@JoinColumn(name = "patient_id",nullable = false)
 	private Patient patient;
 	
